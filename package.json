@@ -1,0 +1,25 @@
+{
+  "name": "sync-to-ical",
+  "version": "1.0.0",
+  "description": "Turn calandar api to iCal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scott1991/sync-to-ical.git"
+  },
+  "author": "scott1991",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scott1991/sync-to-ical/issues"
+  },
+  "homepage": "https://github.com/scott1991/sync-to-ical#readme",
+  "dependencies": {
+    "node-cron": "^3.0.2",
+    "node-fetch": "^3.3.1",
+    "tinycolor2": "^1.6.0"
+  }
+}
