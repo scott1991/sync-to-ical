@@ -20,7 +20,7 @@ http.createServer((req, res) => {
     res.writeHead(404);
     res.end();
   }
-}).listen(23457);
+}).listen(config.servePort);
 console.log('Server running');
 
 // update icsData schedulled by cron
