@@ -1,36 +1,32 @@
 import cron from 'node-cron';
-import fetchData from './fetchData.js';
-import processData from './processData.js';
-import fs from 'fs';
+import getIcs from './ics.js';
+import http from 'http';
+import saveData from './saveData.js'
+import config from './config.js';
 
-const saveData = (data, month) => {
-  fs.writeFileSync(`./calendar.ics`, data);
-};
-
-cron.schedule('0 */8 * * *', async () => {
-  //main();
+let icsData = null;
+getIcs().then(data => {
+  icsData = data;
+  console.log('ICS updated', icsData.fetchDate.toISOString());
+  saveData(icsData.content, icsData.fetchDate);
 });
 
-async function main() {
-  const currentDate = new Date();
-  const prevMonth = currentDate.getMonth();
-  const currentMonth = currentDate.getMonth() + 1;
-  const nextMonth = currentDate.getMonth() + 2;
+// serve icsdata as calendar.ics
+http.createServer((req, res) => {
+  if (req.url === '/calendar.ics') {
+    res.writeHead(200, { 'Content-Type': 'text/calendar' });
+    res.end(icsData.content);
+  } else {
+    res.writeHead(404);
+    res.end();
+  }
+}).listen(23457);
+console.log('Server running');
 
-  const prevMonthData = await fetchData(prevMonth);
-  const currentMonthData = await fetchData(currentMonth);
-  const nextMonthData = await fetchData(nextMonth);
-
-  const prevMonthIcs = processData(prevMonthData);
-  const currentMonthIcs = processData(currentMonthData);
-  const nextMonthIcs = processData(nextMonthData);
-
-  let icsData = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//hacksw/handcal//NONSGML v1.0//EN\n';
-  icsData += prevMonthIcs.join('');
-  icsData += currentMonthIcs.join('');
-  icsData += nextMonthIcs.join('');
-  icsData += 'END:VCALENDAR';
-
-  saveData(icsData, 'calendar');
-}
-main();
+// update icsData schedulled by cron
+cron.schedule(config.cronSchedule, async () => {
+  icsData = await getIcs();
+  console.log('ICS updated', icsData.fetchDate.toISOString());
+  saveData(icsData.content, icsData.fetchDate);
+});
+console.log('Cron scheduled');
