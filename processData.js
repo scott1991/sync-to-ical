@@ -32,7 +32,7 @@ function findClosestColorEmoji(inputColor) {
     const distance = getHSVDistance(inputColor, emojiColor.color);
     if (distance < minDistance) {
       minDistance = distance;
-      closestEmojiColor = emojiColor.emoji;
+      closestEmojiColor = emojiColor;
     }
   }
   
