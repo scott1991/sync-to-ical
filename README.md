@@ -6,24 +6,39 @@ The main function of `Sync to iCal` is to convert Events provided by an API into
 
 Example data:
 ```json
-{"exposed":true,"firstEventStartAt":"2023-03-07T10:00:00Z","lastEventEndAt":"2023-07-31T10:00:00Z","events":[
- {
-  "id": "644a42405a5d4e691d6951a8",
-  "title": "title",
-  "label": {
-    "id": "64193963219988402df54980",
-    "name": "Lable Name",
-    "color": "#AFB4EB"
-  },
-  "starAttendees": [],
-  "linked": false,
-  "createdAt": "2023-04-27T09:37:04.878Z",
-  "startAt": "2023-06-06T09:00:00Z",
-  "allDay": false
-},...]}
-
+{"exposed":true,"firstEventStartAt":"2023-03-07T10:00:00Z","lastEventEndAt":"2023-07-31T10:00:00Z","events":
+[
+  {
+    "id": "64bfae823878450b44c32370",
+    "title": "T-hind S4 EP.8",
+    "label": {
+      "id": "640ff2df6018a516af970588",
+      "name": "Thind",
+      "color": "#F4BDA6"
+    },
+    "starAttendees": [],
+    "linked": false,
+    "createdAt": "2023-07-25T11:14:10.532Z",
+    "startAt": "2023-08-29T10:00:00Z",
+    "allDay": false
+  },...]
+}
 ```
-
+Output ics:
+```
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+BEGIN:VEVENT
+UID:64bfae823878450b44c32370
+DTSTAMP:20230829T100000Z
+DTSTART:20230829T100000Z
+SUMMARY:T-hind S4 EP.8
+DESCRIPTION:🟠 Thind
+END:VEVENT
+...
+END:VCALENDAR
+```
 ## Features
 
 - Regularly fetch event data from a specific API
