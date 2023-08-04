@@ -66,13 +66,13 @@ function convertToIcs(event) {
   }
 
 
-  let icsData = 'BEGIN:VEVENT\n';
-  icsData += `UID:${event.id}\n`;
-  icsData += `DTSTAMP:${event.startAt.replace(/-|:|\.\d\d\d/g, '')}\n`;
-  icsData += `DTSTART:${event.startAt.replace(/-|:|\.\d\d\d/g, '')}\n`;
-  icsData += `SUMMARY:${event.title}\n`;
-  icsData += `DESCRIPTION:${description}\n`;
-  icsData += 'END:VEVENT\n';
+  let icsData = 'BEGIN:VEVENT\r\n';
+  icsData += `UID:${event.id}\r\n`;
+  icsData += `DTSTAMP:${event.startAt.replace(/-|:|\.\d\d\d/g, '')}\r\n`;
+  icsData += `DTSTART:${event.startAt.replace(/-|:|\.\d\d\d/g, '')}\r\n`;
+  icsData += `SUMMARY:${event.title}\r\n`;
+  icsData += `DESCRIPTION:${description}\r\n`;
+  icsData += 'END:VEVENT\r\n';
 
   return icsData;
 }
