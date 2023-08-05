@@ -16,7 +16,7 @@ async function getIcs() {
   const currentMonthIcs = processData(currentMonthData);
   const nextMonthIcs = processData(nextMonthData);
 
-  let icsData = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//hacksw/handcal//NONSGML v1.0//EN\n';
+  let icsData = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//hacksw/handcal//NONSGML v1.0//EN\r\n';
   icsData += prevMonthIcs.join('');
   icsData += currentMonthIcs.join('');
   icsData += nextMonthIcs.join('');
