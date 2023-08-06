@@ -7,7 +7,7 @@ import config from './config.js';
 let icsData = null;
 getIcs().then(data => {
   icsData = data;
-  console.log('ICS updated', icsData.fetchDate.toISOString());
+  //console.log('ICS updated', icsData.fetchDate.toISOString());
   saveData(icsData.content, icsData.fetchDate);
 }).catch(err => {
   console.error(err);
@@ -30,7 +30,7 @@ console.log('Server running');
 cron.schedule(config.cronSchedule, async () => {
   try {
     icsData = await getIcs();
-    console.log('ICS updated', icsData.fetchDate.toISOString());
+    //console.log('ICS updated', icsData.fetchDate.toISOString());
     saveData(icsData.content, icsData.fetchDate); 
   } catch (error) {
     console.error('Fetch error');
